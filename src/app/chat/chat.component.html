@@ -11,6 +11,11 @@
             </div>
           </div>
         </div>
+
+        <div *ngIf="isLoading">
+          <app-loader></app-loader>
+        </div>
+
       </div>
     </div>
   </div>

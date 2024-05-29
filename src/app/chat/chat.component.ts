@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { GenerateStoryService } from '../services/generate-story.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from "../loader/loader.component";
 
 @Component({
-  selector: 'app-chat',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+    selector: 'app-chat',
+    standalone: true,
+    templateUrl: './chat.component.html',
+    styleUrl: './chat.component.scss',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, LoaderComponent]
 })
 export class ChatComponent {
 
@@ -17,9 +18,9 @@ export class ChatComponent {
     { sender: 'chatbot', text: 'Hi there!' },
   ];
   prompt: string = '';
-
-
   story: string = '';
+
+  isLoading: boolean = false;
 
   constructor(private storyService: GenerateStoryService) { }
 
@@ -31,8 +32,13 @@ export class ChatComponent {
       this.messages.push({ sender: 'user', text: this.prompt });
     }
 
+    this.isLoading = true;
+
     this.storyService.generateStory(this.prompt).subscribe(response => {
-      this.story = response.story;
+      this.story = response.response;
+      console.log(this.story);
+      this.isLoading = false;
+      this.messages.push({ sender: 'chatbot', text: this.story });
     });
 
 
