@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("../node_modules/bootstrap/dist/css/bootstrap.css");
+
+html, body { 
+    height: 100%;
+}
+body { 
+    margin: 0;   
+    font-family: "Reddit Mono", monospace;
+    background-color: rgb(39, 39, 39);
+}
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "Reddit Mono", monospace;
+    color: white;
+}
