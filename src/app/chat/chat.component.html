@@ -5,9 +5,8 @@
         <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'other-message': message.sender !== 'user'}">
           <div class="mb-2">
             <div class="card  p-2 d-inline-block rounded">
-              <p>
-                {{ message.text }}
-              </p>
+              <p *ngIf="message.sender === 'user'">{{ message.text }}</p>
+              <p *ngIf="message.sender !== 'user'" [innerHTML]="message.text"></p>
             </div>
           </div>
         </div>
